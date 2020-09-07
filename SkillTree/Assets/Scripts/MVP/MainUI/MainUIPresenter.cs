@@ -2,12 +2,25 @@
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 public class MainUIPresenter : MonoBehaviour
 {
-    [SerializeField] private GameStats gameStats;
-    [SerializeField] private MainUIView mainUiView;
-    [SerializeField] private SkillTreePresenter skillTreePresenter;
+    private GameStats gameStats;
+    private MainUIView mainUiView;
+    private SkillTreePresenter skillTreePresenter;
+
+    [Inject] void Init
+    (
+        MainUIView mainUiView,
+        GameStats gameStats,
+        SkillTreePresenter skillTreePresenter
+    )
+    {
+        this.mainUiView = mainUiView;
+        this.gameStats = gameStats;
+        this.skillTreePresenter = skillTreePresenter;
+    }
     
     private void Start()
     {

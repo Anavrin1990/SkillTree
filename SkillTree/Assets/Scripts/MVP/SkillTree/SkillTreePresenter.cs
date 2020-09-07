@@ -2,14 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SkillTreePresenter : MonoBehaviour
 {
-    [SerializeField] private SkillTreeView skillTreeView;
+    private SkillTreeView skillTreeView;
 
-    private void Start()
+    [Inject] void Init(SkillTreeView skillTreeView)
     {
-        
+        this.skillTreeView = skillTreeView;
     }
 
     public void ToggleSetActive()

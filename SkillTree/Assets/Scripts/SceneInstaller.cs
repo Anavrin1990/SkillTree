@@ -3,7 +3,16 @@ using Zenject;
 
 public class SceneInstaller : MonoInstaller
 {
+    [SerializeField] private GameStats gameStats;
+    [SerializeField] private SkillTreePresenter skillTreePresenter;
+    
     public override void InstallBindings()
     {
+        Container.BindInstance(gameStats).AsSingle();
+        Container.BindInstance(skillTreePresenter).AsSingle();
+        
+        Container.Bind<MainUIView>().FromComponentsSibling();
+        Container.Bind<GameView>().FromComponentsSibling();
+        Container.Bind<SkillTreeView>().FromComponentsSibling();
     }
 }
