@@ -24,7 +24,7 @@ public class MainUIPresenter : MonoBehaviour
     
     private void Start()
     {
-        gameStats.score
+        gameStats.Score
             .ObserveEveryValueChanged(x => x.Value)
             .Subscribe(score => mainUiView.scoreText.text = score.ToString())
             .AddTo(this);

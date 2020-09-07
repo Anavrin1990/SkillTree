@@ -24,7 +24,7 @@ public class GamePresenter : MonoBehaviour
     {
         gameView.boostButton
             .OnClickAsObservable()
-            .Subscribe(_ => gameStats.score.Value++)
+            .Subscribe(_ => gameStats.Score.Value++)
             .AddTo(this);
     }
 }
