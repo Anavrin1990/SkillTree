@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431e71c0623d24fcd8985822470dcdc0, type: 3}
   m_Name: Skill 1
   m_EditorClassIdentifier: 
-  IsLearned:
-    value: 0
+  State:
+    value: 2
   AsRequirementTo: 
   title: "\u0418\u0434\u0442\u0438"
   id: 1

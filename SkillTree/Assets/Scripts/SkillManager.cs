@@ -22,15 +22,40 @@ public class SkillManager
 
     public IObservable<bool> CanLearnSkill(IObservable<Skill> skillStream)
     {
-        return skillStream.CombineLatest(gameStats.Score, (skill, score) =>
+        return skillStream
+            .Where(x => x != null)
+            .CombineLatest(gameStats.Score, (skill, score) =>
         {
             var hasRequiredSkills = skill.Requirements
-                .Select(id => skillStorage.GetSkills()[id].IsLearned.Value)
-                .Contains(true);
+                .Select(id => skillStorage.GetSkills()[id].State.Value)
+                .Contains(Skill.SkillState.learned);
 
             var hasRequiredScore = score >= skill.Cost;
 
             return hasRequiredSkills && hasRequiredScore;
         });
+    }
+
+    public IObservable<Skill.SkillState> GetSkillState(Skill skill)
+    {
+        var skills = skillStorage.GetSkills();
+
+        return skills[skill.Id].Requirements
+            .Select(id => skills[id])
+            .Select(x => x.State)
+            .CombineLatest()
+            .CombineLatest(skill.State, gameStats.Score, (requirementsState, state, score) =>
+            {
+                if (state == Skill.SkillState.learned)
+                {
+                    return Skill.SkillState.learned;
+                }
+                else if (requirementsState.Contains(Skill.SkillState.learned) && score >= skill.Cost)
+                {
+                    return Skill.SkillState.available;
+                }
+                
+                return Skill.SkillState.locked;
+            });
     }
 }

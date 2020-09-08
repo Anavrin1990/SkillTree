@@ -11,7 +11,12 @@ public class Skill : ScriptableObject
         main, walk, run, jump, fight, swim, dash, fly, idle, lie, move
     }
     
-    public ReactiveProperty<bool> IsLearned;
+    public enum SkillState
+    {
+        learned, available, locked
+    }
+    
+    public ReactiveProperty<SkillState> State;
     
     public string Title => title;
     public SkillId Id => id;

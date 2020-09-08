@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill 0
   m_EditorClassIdentifier: 
   IsLearned:
-    value: 1
+    value: 0
   AsRequirementTo: 
   title: "\u0411\u0430\u0437\u0430"
   id: 0

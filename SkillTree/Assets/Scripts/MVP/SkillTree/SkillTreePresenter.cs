@@ -11,6 +11,8 @@ public class SkillTreePresenter : MonoBehaviour
     private SkillTreeView skillTreeView;
     private SkillManager skillManager;
 
+    private ReactiveProperty<Skill> selectedSkill = new ReactiveProperty<Skill>();
+    
     [Inject] void Init
     (
         SkillTreeView skillTreeView,
@@ -23,16 +25,28 @@ public class SkillTreePresenter : MonoBehaviour
 
     private void Start()
     {
-        var selectedSkill = skillTreeView.SkillButtons
+        skillTreeView.SkillButtons
             .Select(x => x.onClick)
             .Merge()
-            .Share();
+            .Subscribe(skill => selectedSkill.Value = skill)
+            .AddTo(this);
         
         skillManager.CanLearnSkill(selectedSkill)
             .Subscribe(canLearn => skillTreeView.LearnButton.interactable = canLearn)
             .AddTo(this);
+
+        foreach (var skillButton in skillTreeView.SkillButtons)
+        {
+            skillManager.GetSkillState(skillButton.Skill)
+                .Subscribe(state => skillButton.SetState(state))
+                .AddTo(this);
+        }
         
-        
+        skillTreeView.LearnButton
+            .OnClickAsObservable()
+            .Select(_ => Skill.SkillState.learned)
+            .Subscribe(state => selectedSkill.Value.State.Value = state)
+            .AddTo(this);
     }
 
     public void ToggleSetActive()
