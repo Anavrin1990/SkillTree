@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431e71c0623d24fcd8985822470dcdc0, type: 3}
   m_Name: Skill 5
   m_EditorClassIdentifier: 
+  name: 5
   id: 5
+  requirements:
+  - {fileID: 11400000, guid: 1ff0bde7b71a84dbd91c1f563d5ec550, type: 2}

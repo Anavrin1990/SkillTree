@@ -3,6 +3,5 @@ using UnityEngine.UI;
 
 public class GameView : MonoBehaviour
 {
-    [SerializeField]
-    public Button boostButton;
+    [SerializeField] public Button boostButton;
 }

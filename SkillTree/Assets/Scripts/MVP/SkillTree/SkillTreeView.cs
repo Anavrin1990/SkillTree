@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class SkillTreeView : MonoBehaviour
 {
-    [SerializeField] private List<Button> skills;
+    public Button[] SkillButtons;
     
-    [SerializeField] private Button learnButton;
-    [SerializeField] private Button forgetButton;
-    [SerializeField] private Button forgetAllButton;
+    public Button LearnButton;
+    public Button ForgetButton;
+    public Button ForgetAllButton;
 }

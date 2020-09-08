@@ -1,13 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Zenject;
 
-[CreateAssetMenu(menuName = "SkillTree/SkillManager")]
-public class SkillManager : ScriptableObject
+public class SkillManager
 {
-    [SerializeField] private List<Skill> skills;
-
-    public Skill GetSkill(int index)
+    private GameStats gameStats;
+    private Dictionary<string, Skill> skills;
+    
+    public SkillManager
+    (
+        SkillFactory skillFactory,
+        GameStats gameStats
+    )
     {
-        return skills[index];
+        this.gameStats = gameStats;
+        this.skills = skillFactory.GetSkills();
     }
 }

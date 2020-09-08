@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1cada909a3c44559c12c0aba3aef86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills:
+  SkillButtons:
   - {fileID: 5641434042264660046}
   - {fileID: 1909651579}
   - {fileID: 143689830}
@@ -423,9 +423,9 @@ MonoBehaviour:
   - {fileID: 848676032}
   - {fileID: 2120555455}
   - {fileID: 692083179}
-  learnButton: {fileID: 2117718686}
-  forgetButton: {fileID: 674222659}
-  forgetAllButton: {fileID: 926869347}
+  LearnButton: {fileID: 2117718686}
+  ForgetButton: {fileID: 674222659}
+  ForgetAllButton: {fileID: 926869347}
 --- !u!114 &218473429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2604,52 +2604,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1410, y: 740}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1467695977
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1467695979}
-  - component: {fileID: 1467695978}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1467695978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467695977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c38dabd122094140a03f2e3d4249794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Score:
-    value: 0
-  LearnedSkills: []
---- !u!4 &1467695979
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467695977}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1471177978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,9 +2735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd2650a7e23f4d2cb6f90e3c2727a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStats: {fileID: 1467695978}
   skillTreePresenter: {fileID: 218473429}
-  skillManager: {fileID: 11400000, guid: ed9c25c089ac642e883c8b457097db74, type: 2}
+  skillFactory: {fileID: 11400000, guid: bd768e87045c945d8a362d45e079f423, type: 2}
 --- !u!114 &1594785086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2828,7 +2781,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1738316740
 PrefabInstance:
@@ -4551,9 +4504,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
-    - target: {fileID: 8191837760834001707, guid: ada205cc5a6704819a5a0cd197df6048, type: 3}
-      propertyPath: m_Text
-      value: "\u0411\u0430\u0437\u0430"
+    - target: {fileID: 5301276090915176666, guid: ada205cc5a6704819a5a0cd197df6048, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301276090915176666, guid: ada205cc5a6704819a5a0cd197df6048, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301276090915176666, guid: ada205cc5a6704819a5a0cd197df6048, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301276090915176666, guid: ada205cc5a6704819a5a0cd197df6048, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ada205cc5a6704819a5a0cd197df6048, type: 3}
