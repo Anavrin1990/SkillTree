@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431e71c0623d24fcd8985822470dcdc0, type: 3}
   m_Name: Skill 2
   m_EditorClassIdentifier: 
-  name: 2
+  IsLearned:
+    value: 0
+  AsRequirementTo: 
+  title: "\u0411\u0435\u0436\u0430\u0442\u044C"
   id: 2
-  requirements:
-  - {fileID: 11400000, guid: 4283e1f317ac641ef85498701291b95d, type: 2}
+  cost: 1
+  requirements: 00000000

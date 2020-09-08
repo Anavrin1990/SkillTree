@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6f4c6ee97e14f67b8127656d97a5e7, type: 3}
-  m_Name: SkillManager
+  m_Script: {fileID: 11500000, guid: a26235a1118374ee2b7c3e87525b9030, type: 3}
+  m_Name: SkillStorage
   m_EditorClassIdentifier: 
   skills:
   - {fileID: 11400000, guid: 4283e1f317ac641ef85498701291b95d, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SkillTreeView : MonoBehaviour
 {
-    public Button[] SkillButtons;
+    public SkillButton[] SkillButtons;
     
     public Button LearnButton;
     public Button ForgetButton;

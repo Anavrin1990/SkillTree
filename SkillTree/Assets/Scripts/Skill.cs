@@ -1,31 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SkillTree/Skill")]
 public class Skill : ScriptableObject
 {
-    public bool isLearned;
-    
-    public string Name => name;
-    public string Id => id;
-    public int Cost => cost;
-    public IEnumerable<Skill> Requirements => requirements;
-    public IEnumerable<Skill> AsRequirementTo => asRequirementTo;
-    
-    [SerializeField] private string name;
-    [SerializeField] private string id;
-    [SerializeField] private int cost;
-    [SerializeField] private Skill[] requirements;
-
-    private List<Skill> asRequirementTo = new List<Skill>();
-    
-    public void SetAsRequirementTo()
+    public enum SkillId
     {
-        foreach (var skill in requirements)
-        {
-            if (skill)
-                skill.asRequirementTo.Add(this);
-        }
+        main, walk, run, jump, fight, swim, dash, fly, idle, lie, move
     }
+    
+    public ReactiveProperty<bool> IsLearned;
+    
+    public string Title => title;
+    public SkillId Id => id;
+    public int Cost => cost;
+    public IEnumerable<SkillId> Requirements => requirements;
+    
+    public List<SkillId> AsRequirementTo;
+    
+    [SerializeField] private string title;
+    [SerializeField] private SkillId id;
+    [SerializeField] private int cost;
+    [SerializeField] private SkillId[] requirements;
 }

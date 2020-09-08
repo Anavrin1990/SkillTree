@@ -23,19 +23,16 @@ public class SkillTreePresenter : MonoBehaviour
 
     private void Start()
     {
-        // gameStats.LearnedSkills
-        //     .ObserveEveryValueChanged(x => x.Value)
-        //     .Where(skills => skills.Length > 0)
-        //     .Subscribe(skills =>
-        //     {
-        //         var skillButtons = skillTreeView.SkillButtons;
-        //         
-        //         for (var i = 1; i < skillButtons.Length; i++)
-        //         {
-        //             skillButtons[i].interactable = gameStats.LearnedSkills.Value[i] != null;
-        //         }
-        //     })
-        //     .AddTo(this);
+        var selectedSkill = skillTreeView.SkillButtons
+            .Select(x => x.onClick)
+            .Merge()
+            .Share();
+        
+        skillManager.CanLearnSkill(selectedSkill)
+            .Subscribe(canLearn => skillTreeView.LearnButton.interactable = canLearn)
+            .AddTo(this);
+        
+        
     }
 
     public void ToggleSetActive()
