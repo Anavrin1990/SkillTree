@@ -25,10 +25,29 @@ public class SkillTreePresenter : MonoBehaviour
 
     private void Start()
     {
-        skillTreeView.SkillButtons
+        var skillButtonOnClick = skillTreeView.SkillButtons
             .Select(x => x.onClick)
             .Merge()
+            .Share();
+        
+        skillButtonOnClick
             .Subscribe(skill => selectedSkill.Value = skill)
+            .AddTo(this);
+
+        skillButtonOnClick
+            .Subscribe(skill =>
+            {
+                foreach (var skillButton in skillTreeView.SkillButtons)
+                {
+                    var isSelected = skill.Id == skillButton.Skill.Id;
+                    skillButton.SetSelected(isSelected);
+                }
+            })
+            .AddTo(this);
+
+        skillButtonOnClick
+            .Select(x => x.Cost.ToString())
+            .Subscribe(cost => skillTreeView.CostText.text = $"Цена {cost}")
             .AddTo(this);
         
         skillManager.CanLearnSkill(selectedSkill)
@@ -41,11 +60,18 @@ public class SkillTreePresenter : MonoBehaviour
                 .Subscribe(state => skillButton.SetState(state))
                 .AddTo(this);
         }
+
+        var learnButtonOnClick = skillTreeView.LearnButton
+            .OnClickAsObservable();
         
-        skillTreeView.LearnButton
-            .OnClickAsObservable()
+        learnButtonOnClick
             .Select(_ => Skill.SkillState.learned)
             .Subscribe(state => selectedSkill.Value.State.Value = state)
+            .AddTo(this);
+
+        learnButtonOnClick
+            .WithLatestFrom(selectedSkill, (_, skill) => -skill.Cost)
+            .Subscribe(cost => skillManager.ChangeScore(cost))
             .AddTo(this);
     }
 

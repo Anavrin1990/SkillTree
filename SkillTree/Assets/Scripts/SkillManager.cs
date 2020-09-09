@@ -58,4 +58,9 @@ public class SkillManager
                 return Skill.SkillState.locked;
             });
     }
+
+    public void ChangeScore(int change)
+    {
+        gameStats.Score.Value += change;
+    }
 }

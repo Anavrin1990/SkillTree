@@ -24,12 +24,17 @@ public class SkillButton : MonoBehaviour
         button = GetComponent<Button>();
         
         GetComponentInChildren<Text>().text = Skill.Title;
-        
+
         onClick = button
             .OnClickAsObservable()
             .Select(_ => Skill);
     }
 
+    public void SetSelected(bool isSelected)
+    {
+        transform.GetChild(0).gameObject.SetActive(isSelected);
+    }
+    
     public void SetState(Skill.SkillState skillState)
     {
         var image = button.GetComponent<Image>();

@@ -26,7 +26,7 @@ public class MainUIPresenter : MonoBehaviour
     {
         gameStats.Score
             .ObserveEveryValueChanged(x => x.Value)
-            .Subscribe(score => mainUiView.scoreText.text = score.ToString())
+            .Subscribe(score => mainUiView.scoreText.text = $"Счет {score.ToString()}")
             .AddTo(this);
 
         mainUiView.skillTreeButton
