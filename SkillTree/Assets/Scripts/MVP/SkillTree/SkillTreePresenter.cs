@@ -29,11 +29,6 @@ public class SkillTreePresenter : MonoBehaviour
         UIUpdateHandle();
         LearnSkillHandle();
         ForgetSkillHandle();
-
-        _skillTreeView.ForgetAllButton
-            .OnClickAsObservable()
-            .Subscribe(_ => _skillManager.ForgetAll())
-            .AddTo(this);
     }
 
     private void SkillSelectHandle()
@@ -112,6 +107,11 @@ public class SkillTreePresenter : MonoBehaviour
         forgetButtonOnClick
             .WithLatestFrom(_selectedSkill, (_, skill) => skill.Cost)
             .Subscribe(cost => _skillManager.ChangeScore(cost))
+            .AddTo(this);
+        
+        _skillTreeView.ForgetAllButton
+            .OnClickAsObservable()
+            .Subscribe(_ => _skillManager.ForgetAll())
             .AddTo(this);
     }
 
