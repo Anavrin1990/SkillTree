@@ -37,7 +37,7 @@ public class SkillStorage : ScriptableObject
         {
             foreach (var id in skill.Value.Requirements)
             {
-                skillDictionary[id].AsRequirementTo.Add(skill.Value.Id);
+                skillDictionary[id].DependentSkills.Add(skill.Value.Id);
             }
         }
     }

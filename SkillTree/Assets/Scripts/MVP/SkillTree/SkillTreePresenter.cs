@@ -50,6 +50,10 @@ public class SkillTreePresenter : MonoBehaviour
             .Subscribe(cost => skillTreeView.CostText.text = $"Цена {cost}")
             .AddTo(this);
         
+        skillManager.CanForgetSkill(selectedSkill)
+            .Subscribe(canLearn => skillTreeView.ForgetButton.interactable = canLearn)
+            .AddTo(this);
+        
         skillManager.CanLearnSkill(selectedSkill)
             .Subscribe(canLearn => skillTreeView.LearnButton.interactable = canLearn)
             .AddTo(this);
@@ -72,6 +76,14 @@ public class SkillTreePresenter : MonoBehaviour
         learnButtonOnClick
             .WithLatestFrom(selectedSkill, (_, skill) => -skill.Cost)
             .Subscribe(cost => skillManager.ChangeScore(cost))
+            .AddTo(this);
+        
+        var forgetButtonOnClick = skillTreeView.ForgetButton
+            .OnClickAsObservable();
+        
+        forgetButtonOnClick
+            .Select(_ => Skill.SkillState.locked)
+            .Subscribe(state => selectedSkill.Value.State.Value = state)
             .AddTo(this);
     }
 

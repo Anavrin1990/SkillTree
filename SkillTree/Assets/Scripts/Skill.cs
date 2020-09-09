@@ -23,7 +23,7 @@ public class Skill : ScriptableObject
     public int Cost => cost;
     public IEnumerable<SkillId> Requirements => requirements;
     
-    public List<SkillId> AsRequirementTo;
+    public List<SkillId> DependentSkills;
     
     [SerializeField] private string title;
     [SerializeField] private SkillId id;
