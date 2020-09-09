@@ -406,7 +406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &218473427
 RectTransform:
   m_ObjectHideFlags: 0
@@ -427,11 +427,11 @@ RectTransform:
   m_Father: {fileID: 1471177982}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: 740}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -50, y: 0}
+  m_SizeDelta: {x: 1200, y: 740}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &218473428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e2679ea1d1c4099aa27df8b8ff213f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostButton: {fileID: 1969501492}
+  BoostButton: {fileID: 1969501492}
 --- !u!114 &372872222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.85882354, g: 0.25915813, b: 0.101960756, a: 1}
+  m_Color: {r: 0.94509804, g: 0.0627451, b: 0.015686275, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1324,7 +1324,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50.00006, y: 20}
+  m_AnchoredPosition: {x: -50, y: 20}
   m_SizeDelta: {x: 327.39, y: 60}
   m_Pivot: {x: 1, y: 0}
 --- !u!1001 &692083177
@@ -2045,7 +2045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.85882354, g: 0.25915813, b: 0.101960756, a: 1}
+  m_Color: {r: 0.9433962, g: 0.060764052, b: 0.013349922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2829,8 +2829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd2650a7e23f4d2cb6f90e3c2727a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillTreePresenter: {fileID: 218473429}
-  skillStorage: {fileID: 11400000, guid: bd768e87045c945d8a362d45e079f423, type: 2}
+  _skillTreePresenter: {fileID: 218473429}
+  _skillStorage: {fileID: 11400000, guid: bd768e87045c945d8a362d45e079f423, type: 2}
 --- !u!114 &1594785086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3341,8 +3341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d993a1421553405c82642924d63b667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 2023036530}
-  skillTreeButton: {fileID: 1907253530}
+  ScoreText: {fileID: 2023036530}
+  SkillTreeButton: {fileID: 1907253530}
 --- !u!114 &1862165148
 MonoBehaviour:
   m_ObjectHideFlags: 0

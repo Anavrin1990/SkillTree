@@ -8,10 +8,10 @@ using Zenject;
 
 public class SkillTreePresenter : MonoBehaviour
 {
-    private SkillTreeView skillTreeView;
-    private SkillManager skillManager;
+    private SkillTreeView _skillTreeView;
+    private SkillManager _skillManager;
 
-    private ReactiveProperty<Skill> selectedSkill = new ReactiveProperty<Skill>();
+    private readonly ReactiveProperty<Skill> _selectedSkill = new ReactiveProperty<Skill>();
     
     [Inject] void Init
     (
@@ -19,25 +19,39 @@ public class SkillTreePresenter : MonoBehaviour
         SkillManager skillManager
     )
     {
-        this.skillTreeView = skillTreeView;
-        this.skillManager = skillManager;
+        _skillTreeView = skillTreeView;
+        _skillManager = skillManager;
     }
 
     private void Start()
     {
-        var skillButtonOnClick = skillTreeView.SkillButtons
-            .Select(x => x.onClick)
+        SkillSelectHandle();
+        UIUpdateHandle();
+        LearnSkillHandle();
+        ForgetSkillHandle();
+
+        _skillTreeView.ForgetAllButton
+            .OnClickAsObservable()
+            .Subscribe(_ => _skillManager.ForgetAll())
+            .AddTo(this);
+    }
+
+    private void SkillSelectHandle()
+    {
+        var skillButtonOnClick = _skillTreeView.SkillButtons
+            .Select(x => x.OnClick)
             .Merge()
-            .Share();
-        
+            .Share()
+            .StartWith(_skillTreeView.SkillButtons.First().Skill);
+
         skillButtonOnClick
-            .Subscribe(skill => selectedSkill.Value = skill)
+            .Subscribe(skill => _selectedSkill.Value = skill)
             .AddTo(this);
 
         skillButtonOnClick
             .Subscribe(skill =>
             {
-                foreach (var skillButton in skillTreeView.SkillButtons)
+                foreach (var skillButton in _skillTreeView.SkillButtons)
                 {
                     var isSelected = skill.Id == skillButton.Skill.Id;
                     skillButton.SetSelected(isSelected);
@@ -47,43 +61,57 @@ public class SkillTreePresenter : MonoBehaviour
 
         skillButtonOnClick
             .Select(x => x.Cost.ToString())
-            .Subscribe(cost => skillTreeView.CostText.text = $"Цена {cost}")
+            .Subscribe(cost => _skillTreeView.CostText.text = $"Цена {cost}")
             .AddTo(this);
-        
-        skillManager.CanForgetSkill(selectedSkill)
-            .Subscribe(canLearn => skillTreeView.ForgetButton.interactable = canLearn)
-            .AddTo(this);
-        
-        skillManager.CanLearnSkill(selectedSkill)
-            .Subscribe(canLearn => skillTreeView.LearnButton.interactable = canLearn)
+    }
+    
+    private void UIUpdateHandle()
+    {
+        _skillManager.CanForgetSkill(_selectedSkill)
+            .Subscribe(canLearn => _skillTreeView.ForgetButton.interactable = canLearn)
             .AddTo(this);
 
-        foreach (var skillButton in skillTreeView.SkillButtons)
+        _skillManager.CanLearnSkill(_selectedSkill)
+            .Subscribe(canLearn => _skillTreeView.LearnButton.interactable = canLearn)
+            .AddTo(this);
+
+        foreach (var skillButton in _skillTreeView.SkillButtons)
         {
-            skillManager.GetSkillState(skillButton.Skill)
+            _skillManager.GetSkillState(skillButton.Skill)
                 .Subscribe(state => skillButton.SetState(state))
                 .AddTo(this);
         }
+    }
 
-        var learnButtonOnClick = skillTreeView.LearnButton
+    private void LearnSkillHandle()
+    {
+        var learnButtonOnClick = _skillTreeView.LearnButton
             .OnClickAsObservable();
-        
+
         learnButtonOnClick
             .Select(_ => Skill.SkillState.learned)
-            .Subscribe(state => selectedSkill.Value.State.Value = state)
+            .Subscribe(state => _selectedSkill.Value.State.Value = state)
             .AddTo(this);
 
         learnButtonOnClick
-            .WithLatestFrom(selectedSkill, (_, skill) => -skill.Cost)
-            .Subscribe(cost => skillManager.ChangeScore(cost))
+            .WithLatestFrom(_selectedSkill, (_, skill) => -skill.Cost)
+            .Subscribe(cost => _skillManager.ChangeScore(cost))
             .AddTo(this);
-        
-        var forgetButtonOnClick = skillTreeView.ForgetButton
+    }
+
+    private void ForgetSkillHandle()
+    {
+        var forgetButtonOnClick = _skillTreeView.ForgetButton
             .OnClickAsObservable();
-        
+
         forgetButtonOnClick
             .Select(_ => Skill.SkillState.locked)
-            .Subscribe(state => selectedSkill.Value.State.Value = state)
+            .Subscribe(state => _selectedSkill.Value.State.Value = state)
+            .AddTo(this);
+
+        forgetButtonOnClick
+            .WithLatestFrom(_selectedSkill, (_, skill) => skill.Cost)
+            .Subscribe(cost => _skillManager.ChangeScore(cost))
             .AddTo(this);
     }
 

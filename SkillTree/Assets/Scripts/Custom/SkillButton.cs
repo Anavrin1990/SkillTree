@@ -7,7 +7,7 @@ using Zenject;
 
 public class SkillButton : MonoBehaviour
 {
-    public IObservable<Skill> onClick;
+    public IObservable<Skill> OnClick;
     public Skill Skill;
     
     [SerializeField] private Skill.SkillId skillId;
@@ -25,7 +25,7 @@ public class SkillButton : MonoBehaviour
         
         GetComponentInChildren<Text>().text = Skill.Title;
 
-        onClick = button
+        OnClick = button
             .OnClickAsObservable()
             .Select(_ => Skill);
     }

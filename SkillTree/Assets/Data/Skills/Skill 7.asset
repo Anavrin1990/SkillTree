@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 431e71c0623d24fcd8985822470dcdc0, type: 3}
-  m_Name: Skill 3
+  m_Name: Skill 7
   m_EditorClassIdentifier: 
   State:
     value: 2
-  AsRequirementTo: 
-  title: "\u041F\u0440\u044B\u0433\u0430\u0442\u044C"
-  id: 3
-  cost: 2
-  requirements: 02000000
+  DependentSkills: 
+  title: "\u041B\u0435\u0442\u0430\u0442\u044C"
+  id: 7
+  cost: 3
+  requirements: 0500000006000000

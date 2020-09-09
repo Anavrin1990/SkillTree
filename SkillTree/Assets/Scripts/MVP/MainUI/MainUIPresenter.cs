@@ -6,9 +6,9 @@ using Zenject;
 
 public class MainUIPresenter : MonoBehaviour
 {
-    private GameStats gameStats;
-    private MainUIView mainUiView;
-    private SkillTreePresenter skillTreePresenter;
+    private GameStats _gameStats;
+    private MainUIView _mainUiView;
+    private SkillTreePresenter _skillTreePresenter;
 
     [Inject] void Init
     (
@@ -17,21 +17,21 @@ public class MainUIPresenter : MonoBehaviour
         SkillTreePresenter skillTreePresenter
     )
     {
-        this.mainUiView = mainUiView;
-        this.gameStats = gameStats;
-        this.skillTreePresenter = skillTreePresenter;
+        _mainUiView = mainUiView;
+        _gameStats = gameStats;
+        _skillTreePresenter = skillTreePresenter;
     }
     
     private void Start()
     {
-        gameStats.Score
+        _gameStats.Score
             .ObserveEveryValueChanged(x => x.Value)
-            .Subscribe(score => mainUiView.scoreText.text = $"Счет {score.ToString()}")
+            .Subscribe(score => _mainUiView.ScoreText.text = $"Счет {score.ToString()}")
             .AddTo(this);
 
-        mainUiView.skillTreeButton
+        _mainUiView.SkillTreeButton
             .OnClickAsObservable()
-            .Subscribe(_ => skillTreePresenter.ToggleSetActive())
+            .Subscribe(_ => _skillTreePresenter.ToggleSetActive())
             .AddTo(this);
     }
 }

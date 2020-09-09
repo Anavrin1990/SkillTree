@@ -3,6 +3,6 @@ using UnityEngine.UI;
 
 public class MainUIView : MonoBehaviour
 {
-    [SerializeField] public Text scoreText;
-    [SerializeField] public Button skillTreeButton;
+    [SerializeField] public Text ScoreText;
+    [SerializeField] public Button SkillTreeButton;
 }

@@ -7,8 +7,8 @@ using Zenject;
 
 public class GamePresenter : MonoBehaviour
 {
-    private GameStats gameStats;
-    private GameView gameView;
+    private GameStats _gameStats;
+    private GameView _gameView;
 
     [Inject] void Init
     (
@@ -16,15 +16,15 @@ public class GamePresenter : MonoBehaviour
         GameView gameView
     )
     {
-        this.gameStats = gameStats;
-        this.gameView = gameView;
+        _gameStats = gameStats;
+        _gameView = gameView;
     }
     
     private void Start()
     {
-        gameView.boostButton
+        _gameView.BoostButton
             .OnClickAsObservable()
-            .Subscribe(_ => gameStats.Score.Value++)
+            .Subscribe(_ => _gameStats.Score.Value++)
             .AddTo(this);
     }
 }

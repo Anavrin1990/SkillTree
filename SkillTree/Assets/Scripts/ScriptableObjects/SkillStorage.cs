@@ -8,36 +8,36 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SkillTree/SkillStorage")]
 public class SkillStorage : ScriptableObject
 {
-    [SerializeField] private List<Skill> skills;
+    [SerializeField] private List<Skill> _skills;
 
-    private Dictionary<Skill.SkillId, Skill> skillDictionary = new Dictionary<Skill.SkillId, Skill>();
+    private Dictionary<Skill.SkillId, Skill> _skillDictionary = new Dictionary<Skill.SkillId, Skill>();
     
     public Dictionary<Skill.SkillId, Skill> GetSkills()
     {
-        if (skillDictionary.IsEmpty())
+        if (_skillDictionary.IsEmpty())
         {
             InstantiateSkills();
             SetAsRequirementTo();
         }
         
-        return skillDictionary;
+        return _skillDictionary;
     }
 
     private void InstantiateSkills()
     {
-        foreach (var skill in skills.Select(Instantiate))
+        foreach (var skill in _skills.Select(Instantiate))
         {
-            skillDictionary[skill.Id] = skill;
+            _skillDictionary[skill.Id] = skill;
         }
     }
 
     private void SetAsRequirementTo()
     {
-        foreach (var skill in skillDictionary)
+        foreach (var skill in _skillDictionary)
         {
             foreach (var id in skill.Value.Requirements)
             {
-                skillDictionary[id].DependentSkills.Add(skill.Value.Id);
+                _skillDictionary[id].DependentSkills.Add(skill.Value.Id);
             }
         }
     }
