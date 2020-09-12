@@ -17,7 +17,7 @@ public class SkillStorage : ScriptableObject
         if (_skillDictionary.IsEmpty())
         {
             InstantiateSkills();
-            SetAsRequirementTo();
+            SetDependentSkills();
         }
         
         return _skillDictionary;
@@ -31,7 +31,7 @@ public class SkillStorage : ScriptableObject
         }
     }
 
-    private void SetAsRequirementTo()
+    private void SetDependentSkills()
     {
         foreach (var skill in _skillDictionary)
         {
