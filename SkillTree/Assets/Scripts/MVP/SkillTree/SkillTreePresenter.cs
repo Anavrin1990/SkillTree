@@ -63,7 +63,7 @@ public class SkillTreePresenter : MonoBehaviour
     private void UIUpdateHandle()
     {
         _skillManager.CanForgetSkill(_selectedSkill)
-            .Subscribe(canLearn => _skillTreeView.ForgetButton.interactable = canLearn)
+            .Subscribe(canForget => _skillTreeView.ForgetButton.interactable = canForget)
             .AddTo(this);
 
         _skillManager.CanLearnSkill(_selectedSkill)
